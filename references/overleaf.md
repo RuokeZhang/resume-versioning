@@ -11,6 +11,21 @@ The password is an Overleaf **git token** (Account Settings → Git integration)
 not the account password. If pushing needs credentials the user has not cached,
 give them the command to run themselves rather than trying to capture a secret.
 
+## One project, several resumes
+
+Overleaf compiles **one** file: whichever is set as the main document. That
+setting is per project, not per open file, so pressing Recompile while looking
+at a driver still builds whatever the main document is. A repo with several
+drivers therefore looks broken in a very confusing way — every driver appears
+to render as the same resume.
+
+Do not add a root `main.tex` that inputs one driver. It hardcodes the choice
+and hides it behind a file nobody thinks to check. Each driver already declares
+its own `\documentclass`, so Overleaf lists them all under
+**Menu → Main document**; switching there is one click.
+
+If a project already has such a `main.tex`, delete it.
+
 ## What the bridge does and does not do
 
 - It syncs **one branch only**. Pushing a side branch does not appear in the
