@@ -18,7 +18,7 @@ A resume repo drifts when the same wording exists in two files. This skill
 keeps it in one, and verifies that restructuring did not silently change any
 rendered PDF.
 
-## The four axes
+## The axes
 
 Every resume is a selection, never a copy:
 
@@ -33,7 +33,7 @@ profiles/<person>.tex  ×  templates/<layout>.tex  ×  content/<target>.tex
 | `templates/` | all layout; implements the command interface | visual style |
 | `content/` | wording only, zero layout markup | target |
 | `fonts/` | typeface selection; optional, defaults to sourcesans | face |
-| drivers | a selection of the three, plus switches | finished resume |
+| drivers | a selection of the above, plus switches | finished resume |
 | `CONTENT_LIBRARY/` | archived and candidate wording, in Markdown | topic |
 
 A driver is ~12 lines. If a driver contains a sentence that appears on the
