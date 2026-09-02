@@ -153,6 +153,22 @@ If one template fits and another overflows on the same content, that is a
 density difference between templates, not a content problem — but try trimming
 content first. Changing a template affects every resume that uses it.
 
+A bullet whose second line holds one or two words reads as an accident. Since
+the height is the same anywhere under two full lines, the fix is to extend it
+to fill the line, not to cut it back to one.
+
+### Sub-headings are all or nothing
+
+`\resumeProjectTitle` marks a named piece of work inside a single entry — two
+projects under one job, say. Within one entry it is all or nothing: some
+bullets under a sub-heading and the rest bare makes the bare ones look like
+they belong to whatever heading came last.
+
+If a piece of work is a sibling rather than a part — a second project, not a
+strand of the first — give it its own `\resumeProjectHeading` with its own
+date. Nesting siblings under one heading misrepresents what they are, and is
+usually what produced the mismatched sub-headings in the first place.
+
 ## Local rendering is not Overleaf
 
 `scripts/preview.sh` uses `tectonic`, which differs from Overleaf in two ways
