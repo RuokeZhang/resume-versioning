@@ -106,6 +106,9 @@ and silently shifts the metrics of every line.
 
 Omit it and the template falls back to `sourcesans`.
 
+The macro in the filename expands under both engines — confirmed on Overleaf's
+pdfLaTeX and on tectonic's XeTeX.
+
 | File | Face | Notes |
 |---|---|---|
 | `sourcesans` | Source Sans Pro | humanist sans; the default |
