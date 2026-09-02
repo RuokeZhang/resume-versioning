@@ -75,6 +75,7 @@ with `\providecommand` so drivers can override:
 \ResumeIncludeEarlyRolestrue
 
 \input{profiles/example.tex}
+\input{fonts/carlito.tex}
 \input{templates/classic.tex}
 
 \begin{document}
@@ -84,3 +85,39 @@ with `\providecommand` so drivers can override:
 ```
 
 That is the whole file. Anything longer is content leaking into a driver.
+
+## Fonts
+
+A driver may `\input` one file from `fonts/` before the template. The template
+uses whatever was loaded, and falls back to `fonts/sourcesans.tex` if the
+driver picked nothing, so the choice is optional.
+
+| File | Face | Notes |
+|---|---|---|
+| `sourcesans` | Source Sans Pro | humanist sans; the default |
+| `carlito` | Carlito | metric-compatible with **Calibri** |
+| `lato` | Lato | slightly narrower than Source Sans |
+| `helvetica` | Helvetica clone | closest free stand-in for Arial |
+| `roboto` | Roboto | neutral, holds up small |
+| `caladea` | Caladea | metric-compatible with **Cambria** |
+| `times` | newtxtext | the conservative choice |
+| `charter` | XCharter | sturdier serif, more open than Times |
+| `garamond` | EB Garamond | old-style; runs small |
+
+Calibri and Cambria are proprietary Microsoft fonts and cannot be bundled.
+Carlito and Caladea are free clones with the **same metrics**, so a document
+laid out for Calibri keeps its line breaks under Carlito.
+
+Adding a face means one file in `fonts/` that defines `\ResumeFontName` and
+loads the packages:
+
+```latex
+% fonts/<name>.tex
+\newcommand{\ResumeFontName}{<name>}
+\usepackage{<package>}
+\renewcommand{\familydefault}{\sfdefault}   % sans faces only
+```
+
+Changing the face changes line breaks, so re-run `scripts/verify.sh` and look
+at the render: a bullet that fitted two lines in one face may need three in
+another.

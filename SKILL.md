@@ -23,7 +23,8 @@ rendered PDF.
 Every resume is a selection, never a copy:
 
 ```
-profiles/<person>.tex  ×  templates/<layout>.tex  ×  content/<target>.tex  +  switches
+profiles/<person>.tex  ×  templates/<layout>.tex  ×  content/<target>.tex
+                       ×  fonts/<face>.tex        +  switches
 ```
 
 | Directory | Holds | One file per |
@@ -31,6 +32,7 @@ profiles/<person>.tex  ×  templates/<layout>.tex  ×  content/<target>.tex  +  
 | `profiles/` | name, email, phone, links | identity |
 | `templates/` | all layout; implements the command interface | visual style |
 | `content/` | wording only, zero layout markup | target |
+| `fonts/` | typeface selection; optional, defaults to sourcesans | face |
 | drivers | a selection of the three, plus switches | finished resume |
 | `CONTENT_LIBRARY/` | archived and candidate wording, in Markdown | topic |
 
@@ -82,6 +84,7 @@ hit in practice.
 | Add a person | One new file in `profiles/`. Nothing else. |
 | Add a target | One new file in `content/`, plus a driver per person |
 | Add a visual template | Implement every command in `references/INTERFACE.md` |
+| Change the typeface | One line in the driver: `\input{fonts/<face>.tex}` |
 | Add a resume | `scripts/new-resume.sh` -- never copy an existing driver |
 | Change wording | Edit `content/`, archive the old text, then verify |
 | Preview | `scripts/preview.sh` -- renders locally, no Overleaf needed |

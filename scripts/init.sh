@@ -30,6 +30,15 @@ copy "$ASSETS/templates/classic.tex"              templates/classic.tex
 copy "$ASSETS/templates/engineering.tex"          templates/engineering.tex
 copy "$ASSETS/profiles/example.tex"               profiles/example.tex
 copy "$ASSETS/content/example-role.tex"           content/example-role.tex
+copy "$ASSETS/fonts/sourcesans.tex"                fonts/sourcesans.tex
+copy "$ASSETS/fonts/carlito.tex"                   fonts/carlito.tex
+copy "$ASSETS/fonts/lato.tex"                      fonts/lato.tex
+copy "$ASSETS/fonts/helvetica.tex"                 fonts/helvetica.tex
+copy "$ASSETS/fonts/roboto.tex"                    fonts/roboto.tex
+copy "$ASSETS/fonts/caladea.tex"                   fonts/caladea.tex
+copy "$ASSETS/fonts/times.tex"                     fonts/times.tex
+copy "$ASSETS/fonts/charter.tex"                   fonts/charter.tex
+copy "$ASSETS/fonts/garamond.tex"                  fonts/garamond.tex
 copy "$ASSETS/CONTENT_LIBRARY/README.md"          CONTENT_LIBRARY/README.md
 copy "$ASSETS/CONTENT_LIBRARY/EXPERIENCE/Example.md" CONTENT_LIBRARY/EXPERIENCE/Example.md
 copy "$HERE/../references/INTERFACE.md"           templates/INTERFACE.md
@@ -49,12 +58,11 @@ if [ ! -e "$TARGET/Example_Resume.tex" ]; then
 % Example driver: example profile, classic template, example-role content.
 \documentclass[letterpaper,11pt]{article}
 
-\newif\ifResumeTimes
-\ResumeTimesfalse
 \newif\ifResumeIncludeEarlyRoles
 \ResumeIncludeEarlyRolestrue
 
 \input{profiles/example.tex}
+\input{fonts/sourcesans.tex}
 \input{templates/classic.tex}
 
 \begin{document}
@@ -69,8 +77,9 @@ echo
 echo "Structure:"
 echo "  profiles/   one file per identity"
 echo "  templates/  one file per visual style; see templates/INTERFACE.md"
-echo "  content/    one file per target role -- wording only, no layout"
-echo "  *.tex       drivers: a selection of the three"
+echo "  content/    one file per target -- wording only, no layout"
+echo "  fonts/      one file per typeface; optional, defaults to sourcesans"
+echo "  *.tex       drivers: a selection of the above"
 echo
 if command -v tectonic >/dev/null; then
   echo "Rendering the example to check the toolchain ..."

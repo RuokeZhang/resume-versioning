@@ -17,7 +17,17 @@
 ]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[default]{sourcesanspro}
+
+% Font. The driver may \input a fonts/ file before this one; if it did not,
+% fall back to the default. Replaces an earlier \ifResumeTimes boolean, which
+% could only ever express two choices.
+\providecommand{\ResumeFontName}{}
+\makeatletter
+\ifx\ResumeFontName\@empty
+  \input{fonts/sourcesans.tex}
+\fi
+\makeatother
+
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
 \usepackage{titlesec}

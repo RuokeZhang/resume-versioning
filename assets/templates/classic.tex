@@ -27,16 +27,15 @@
 \setlength{\columnsep}{-1pt}
 \input{glyphtounicode}
 
-% Serif or sans. The driver must declare this before \input-ing the template:
-%   \newif\ifResumeTimes
-%   \ResumeTimesfalse      % or \ResumeTimestrue for serif
-% It cannot be defaulted here: a \newif guarded by \ifdefined breaks TeX's
-% \if/\fi matching when the conditional already exists.
-\ifResumeTimes
-  \usepackage{newtxtext}
-\else
-  \usepackage[default]{sourcesanspro}
+% Font. The driver may \input a fonts/ file before this one; if it did not,
+% fall back to the default. Replaces an earlier \ifResumeTimes boolean, which
+% could only ever express two choices.
+\providecommand{\ResumeFontName}{}
+\makeatletter
+\ifx\ResumeFontName\@empty
+  \input{fonts/sourcesans.tex}
 \fi
+\makeatother
 
 % Spacing knobs. A driver may override these before \input-ing this file; two
 % roles are often tuned to slightly different values.

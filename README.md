@@ -23,6 +23,7 @@ Every resume is a selection, never a copy:
 
 ```
 profiles/<person>.tex  ×  templates/<layout>.tex  ×  content/<target>.tex
+                       ×  fonts/<face>.tex
 ```
 
 | Directory | Holds | One file per |
@@ -30,6 +31,7 @@ profiles/<person>.tex  ×  templates/<layout>.tex  ×  content/<target>.tex
 | `profiles/` | name, email, phone, links | identity |
 | `templates/` | all layout, implementing a shared command interface | visual style |
 | `content/` | wording only, zero layout markup | target |
+| `fonts/` | typeface selection; optional | face |
 | drivers | a selection of the three, plus switches | finished resume |
 | `CONTENT_LIBRARY/` | archived and candidate wording, in Markdown | topic |
 
@@ -42,6 +44,7 @@ A driver is about twelve lines:
 \ResumeTimesfalse
 
 \input{profiles/example.tex}
+\input{fonts/carlito.tex}
 \input{templates/classic.tex}
 
 \begin{document}
@@ -49,6 +52,10 @@ A driver is about twelve lines:
 \input{content/example-role.tex}
 \end{document}
 ```
+
+Nine faces ship in `fonts/`, including **Carlito** and **Caladea** — free
+clones with the same metrics as Calibri and Cambria, which are proprietary and
+cannot be bundled. Swapping one is a one-line change in the driver.
 
 Adding a person is one file. Adding a target is one file. Adding a visual
 template means implementing the command interface in
