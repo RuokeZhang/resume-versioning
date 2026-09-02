@@ -24,7 +24,17 @@ and hides it behind a file nobody thinks to check. Each driver already declares
 its own `\documentclass`, so Overleaf lists them all under
 **Menu → Main document**; switching there is one click.
 
-If a project already has such a `main.tex`, delete it.
+If a project already has such a `main.tex`, delete it — but set the main
+document in the same sitting. Deleting it leaves the setting on **None**, and
+a project with no main document fails with
+
+```
+! ==> Fatal error occurred, no output PDF file produced!
+... file error in nonstop mode
+```
+
+which names no file and reads like a broken document rather than an unset
+preference. Every driver is listed in the dropdown; pick one.
 
 ## What the bridge does and does not do
 
