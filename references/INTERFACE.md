@@ -1,0 +1,86 @@
+# Template command interface
+
+Every template implements this command set. Content files use only these
+commands, which is what lets one content file render under any template.
+
+Adding a template means implementing **all** of it. A missing command produces
+an "Undefined control sequence" error only for the resumes that happen to use
+it, so check the whole table rather than compiling one driver.
+
+## Structural
+
+| Command | Meaning |
+|---|---|
+| `\ResumeHeader` | Name and contact block. Reads the identity macros below. |
+| `\resumeSubHeadingListStart` / `...End` | Opens/closes the list holding entries. May be a no-op if the layout sets entries as plain paragraphs. |
+| `\resumeItemListStart` / `...End` | Opens/closes a bullet list inside an entry. |
+| `\resumeItemListStartTight` | Bullet list flush against the heading above it. |
+
+## Entries
+
+| Command | Args |
+|---|---|
+| `\resumeSubheading` | `{org}{date}{title}{location}` — job or role entry |
+| `\resumeEducation` | `{school}{date}{degree}` — a degree is not a job title, and layouts that italicise job titles must not italicise this |
+| `\resumePublication` | `{title}{venue}{status note}` — titles are long; some layouts must break the note onto its own line |
+| `\resumeProjectHeading` | `{title}{date}` |
+| `\resumeSubSubheading` | `{title}{date}` |
+| `\resumeItem` | `{text}` — one bullet |
+| `\resumeProjectTitle` | `{text}` — sub-project header inside an entry's bullet list |
+
+`\resumeEducation` and `\resumePublication` exist because a layout can need to
+render them differently from `\resumeSubheading` even though all three are
+"a bold thing, a date, and a subtitle". Collapsing them back into one command
+is a false economy — it is exactly what forces a content fork later.
+
+## Spacing
+
+| Command | Meaning |
+|---|---|
+| `\resumeSectionGap` | Trailing gap after a section body. |
+| `\resumeTighten{<len>}` | Negative leading hint. **A template may ignore it.** |
+
+`\resumeTighten` is the escape hatch for hand-tuned kerning. One layout's
+`\vspace{-10pt}` between a heading and its bullets can be correct there and
+overlap text badly elsewhere. Content states the hint; each template decides
+whether to honour it. A dense layout defines it as `\vspace{#1}`; an airy one
+defines it as `{}`.
+
+## Identity macros
+
+Set by `profiles/<person>.tex`, consumed by `\ResumeHeader`:
+
+`\ResumeName`, `\ResumeEmail`, `\ResumePhone`, `\ResumeLinkedInName`,
+`\ResumeLinkedInURL`
+
+Put **every** contact detail here. A phone number hardcoded in a template is
+invisible until someone adds a second identity and the wrong number ships.
+
+## Layout switches
+
+Set by the driver before `\input`-ing a template. Templates declare their own
+with `\providecommand` so drivers can override:
+
+| Switch | Typical use |
+|---|---|
+| `\ifResume<Feature>` | Include or drop an optional entry, read by a content file |
+| `\Resume<Thing>Skip` | Per-role spacing knob where two roles were tuned differently |
+
+## Driver shape
+
+```latex
+\documentclass[letterpaper,11pt]{article}
+
+\newif\ifResumeIncludeEarlyRoles
+\ResumeIncludeEarlyRolestrue
+
+\input{profiles/alex.tex}
+\input{templates/classic.tex}
+
+\begin{document}
+\ResumeHeader
+\input{content/backend.tex}
+\end{document}
+```
+
+That is the whole file. Anything longer is content leaking into a driver.

@@ -1,0 +1,150 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Copyright (c) 2020 Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT -- full text in NOTICE
+%------------------------
+
+% Dense single-column layout. Implements the command interface in
+% references/INTERFACE.md. Input this from a driver, after the driver has set
+% its identity macros and before \begin{document}.
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+% Serif or sans. The driver must declare this before \input-ing the template:
+%   \newif\ifResumeTimes
+%   \ResumeTimesfalse      % or \ResumeTimestrue for serif
+% It cannot be defaulted here: a \newif guarded by \ifdefined breaks TeX's
+% \if/\fi matching when the conditional already exists.
+\ifResumeTimes
+  \usepackage{newtxtext}
+\else
+  \usepackage[default]{sourcesanspro}
+\fi
+
+% Spacing knobs. A driver may override these before \input-ing this file; two
+% roles are often tuned to slightly different values.
+\providecommand{\ResumeSectionSkip}{-7pt}
+\providecommand{\ResumeProjectTitleSkip}{3pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{\ResumeSectionSkip}\raggedright\Large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-2pt}]
+
+% Machine readable / ATS parsable output
+\pdfgentounicode=1
+
+%-------------------------
+% Command interface
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{\normalsize #1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+% This layout renders all three the same way. Others do not -- keep them
+% distinct so a new template can differentiate without forking content.
+\newcommand{\resumeEducation}[3]{\resumeSubheading{#1}{#2}{#3}{}}
+\newcommand{\resumePublication}[3]{\resumeSubheading{#1}{#2}{#3}{}}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{\normalsize #1} & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\newcommand{\resumeProjectTitle}[1]{
+  \item[]
+  \vspace{\ResumeProjectTitleSkip}
+  \small\textbf{#1}
+  \vspace{-1pt}
+}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+\newcommand{\resumeItemListStartTight}{\begin{itemize}[topsep=0pt]}
+
+\newcommand{\resumeSectionGap}{\vspace{-16pt}}
+
+% This layout's metrics are tight enough to want hand-tuned negative leading.
+\newcommand{\resumeTighten}[1]{\vspace{#1}}
+
+% Identity defaults. Drivers set these via profiles/<person>.tex.
+\providecommand{\ResumeName}{Your Name}
+\providecommand{\ResumeEmail}{you@example.com}
+\providecommand{\ResumePhone}{000-000-0000}
+\providecommand{\ResumeLinkedInName}{Your Name}
+\providecommand{\ResumeLinkedInURL}{https://www.linkedin.com/in/your-handle/}
+
+%----------HEADING----------
+\newcommand{\ResumeHeader}{%
+\begin{center}
+    {\Huge  \ResumeName} \\  \vspace{1pt}
+
+
+     \small \href{mailto:\ResumeEmail}{\raisebox{-0.2\height}\faEnvelope\  \underline{\ResumeEmail}} ~
+     ~
+ {\raisebox{-0.2\height}\faPhone\ {\ResumePhone}}
+     ~
+    \href{\ResumeLinkedInURL}{\raisebox{-0.2\height}\faLinkedin\ \underline{\ResumeLinkedInName}}
+
+
+    \vspace{-8pt}
+\end{center}
+}

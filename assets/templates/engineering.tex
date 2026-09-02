@@ -1,0 +1,110 @@
+%-------------------------
+% Engineering Resumes layout
+% Based off of: https://www.reddit.com/r/EngineeringResumes/wiki/
+%------------------------
+
+% Airier single-column layout. Implements the same command interface as
+% classic.tex (references/INTERFACE.md), so one content file renders under
+% either. Input this from a driver, after the driver has set its identity
+% macros and before \begin{document}.
+
+\usepackage[
+  letterpaper,
+  top=0.5in,
+  bottom=0.5in,
+  left=0.5in,
+  right=0.5in
+]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[default]{sourcesanspro}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+
+\raggedright
+\pagestyle{empty}
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+\titleformat{\section}
+  {\bfseries\large}
+  {}
+  {0pt}
+  {}
+  [\vspace{1pt}\titlerule\vspace{-6.5pt}]
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$}
+\setlist[itemize]{itemsep=-2pt, leftmargin=12pt, topsep=6pt, before=\small}
+
+%-------------------------
+% Command interface
+
+% Entries are plain paragraphs here, not list items, so the outer subheading
+% list is a no-op.
+\newcommand{\resumeSubHeadingListStart}{}
+\newcommand{\resumeSubHeadingListEnd}{}
+
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStartTight}{\begin{itemize}}
+
+\newcommand{\resumeItem}[1]{\item #1}
+\newcommand{\resumeSubItem}[1]{\item #1}
+
+\newcommand{\resumeSubheading}[4]{%
+  \textbf{#1} -- \textit{#3} \hfill #2 \\%
+  \vspace{-9pt}%
+}
+
+% A degree is not a job title, so it stays upright here even though the job
+% title above is italicised.
+\newcommand{\resumeEducation}[3]{%
+  \textbf{#1} -- #3 \hfill #2 \\%
+}
+
+% Publication titles are long, so the status note gets its own line rather
+% than being appended to the title the way a job title is.
+\newcommand{\resumePublication}[3]{%
+  \textbf{#1} \hfill #2 \\%
+  \textit{#3} \\%
+  \vspace{-9pt}%
+}
+
+\newcommand{\resumeSubSubheading}[2]{%
+  \textit{#1} \hfill #2 \\%
+  \vspace{-9pt}%
+}
+
+\newcommand{\resumeProjectHeading}[2]{%
+  \textbf{#1} \hfill #2 \\%
+  \vspace{-9pt}%
+}
+
+\newcommand{\resumeProjectTitle}[1]{\item[] \textbf{#1}}
+
+\newcommand{\resumeSectionGap}{\vspace{-18.5pt}}
+
+% Negative leading tuned for a denser layout does not transfer to these
+% metrics -- honouring it overlaps headings with body text. Ignore it.
+\newcommand{\resumeTighten}[1]{}
+
+% Identity defaults. Drivers set these via profiles/<person>.tex.
+\providecommand{\ResumeName}{Your Name}
+\providecommand{\ResumeEmail}{you@example.com}
+\providecommand{\ResumePhone}{000-000-0000}
+\providecommand{\ResumeLinkedInName}{Your Name}
+\providecommand{\ResumeLinkedInURL}{https://www.linkedin.com/in/your-handle/}
+
+%----------HEADING----------
+\newcommand{\ResumeHeader}{%
+\centerline{\Huge \ResumeName}
+\vspace{5pt}
+\centerline{
+  \href{mailto:\ResumeEmail}{\ResumeEmail}
+  \enspace|\enspace \ResumePhone
+  \enspace|\enspace
+  \href{\ResumeLinkedInURL}{LinkedIn: \ResumeLinkedInName}
+}
+\vspace{-10pt}
+}

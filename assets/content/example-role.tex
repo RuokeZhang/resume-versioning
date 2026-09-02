@@ -1,0 +1,54 @@
+% Wording only. Every command used here must exist in BOTH templates --
+% see references/INTERFACE.md. No \vspace, no \begin{itemize}, no raw layout:
+% use \resumeTighten{} for spacing hints a template is free to ignore.
+
+\section{EDUCATION}
+  \resumeSubHeadingListStart
+    \resumeEducation
+      {University Name}{Sep 20XX -- Jun 20XX}
+      {BS in Field\textbf{ | GPA: X.XX/4.0}}
+  \resumeSubHeadingListEnd
+
+\section{WORK EXPERIENCE}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Company Name}{Mon 20XX -- Mon 20XX}
+      {Job Title}{}
+      \resumeItemListStart
+        \resumeItem{Built <what> using <how>, <measurable outcome>.}
+        \resumeItem{Shipped <what> that <effect on users or system>.}
+      \resumeItemListEnd
+
+% An optional entry, toggled by a switch the driver declares.
+\ifResumeIncludeEarlyRoles
+    \resumeSubheading
+      {Earlier Company}{Mon 20XX -- Mon 20XX}
+      {Job Title}{}
+      \resumeItemListStart
+        \resumeItem{Built <what> using <how>.}
+      \resumeItemListEnd
+\fi
+  \resumeSubHeadingListEnd
+\resumeSectionGap
+
+\section{PROJECTS}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+        {Project Name \textnormal{\small\textperiodcentered{} \href{https://example.com}{[Link]}}}
+        {Mon 20XX}
+      \resumeItemListStart
+        \resumeItem{Built <what>, <what it does>.}
+      \resumeItemListEnd
+    \resumeSubHeadingListEnd
+\resumeSectionGap
+
+\section{SKILLS}
+\begin{itemize}[leftmargin=0.15in, label={}, topsep=0pt, partopsep=0pt]
+  \small{
+    \item{
+      \textbf{Languages}{: <list>} \\
+      \textbf{Tools}{: <list>}
+    }
+  }
+\end{itemize}
+\resumeSectionGap
