@@ -52,9 +52,19 @@ hit in practice.
    actively wrong under another template's metrics: it overlaps headings with
    body text. Use `\resumeTighten{<len>}`, which a template may ignore.
 
-3. **Archive before replacing.** Copy outgoing wording into the matching
-   `CONTENT_LIBRARY/` file and mark it `ARCHIVED` with a date, before writing
-   the replacement. See `references/content-library.md`.
+3. **Archive the words, not a description of them.** Before overwriting any
+   wording, copy the outgoing text **verbatim** into the matching
+   `CONTENT_LIBRARY/` file under a dated `ARCHIVED` heading. An entry that
+   says what changed but does not contain the old sentences is not an
+   archive — the wording is gone, and the only way back is reading a diff
+   nobody will read. This has already happened: a set of bullets was archived
+   as the note *"shortened to one-line bullets"*, and when the longer version
+   was wanted again it had to be written from scratch.
+
+   Also archive wording removed for **length**, marked `CANDIDATE` with the
+   reason. Text cut to fit a page is not text that was wrong, and it is the
+   first thing to reach for when room appears. See
+   `references/content-library.md`.
 
 4. **Never resolve a conflicting fact by guessing.** Conflicting metrics, dates,
    titles, or URLs across files are drift, and only the user knows which is
@@ -105,6 +115,43 @@ pdftoppm -png -r 150 build/<name>.pdf out                   # Linux (poppler)
 
 Read the image. Check for overlapping text, bad line wraps, and page overflow.
 Hashes cannot catch a heading that now sits on top of a bullet.
+
+### Bullet length and page fill
+
+Two complaints come up constantly, and they have the same fix.
+
+*"The bullets look thin"* usually means they are one printed line each. A bullet
+carrying a method and an outcome runs roughly 110-170 characters and wraps to
+two lines. Measure before rewriting:
+
+```bash
+grep -o '\\resumeItem{[^}]*}' content/<file>.tex \
+  | sed 's/\\resumeItem{//;s/}$//' | awk '{print length($0)}' | sort -n
+```
+
+*"It does not fill the page"* is then tempting to fix by adding bullets. Do the
+opposite: **fewer bullets, each fuller.** Twelve two-line bullets occupy the
+same height as twenty-four one-line bullets and read far better. Lengthening
+every existing bullet without cutting any will overflow to a second page.
+
+Page count is worth checking directly, since a second page is easy to miss when
+only the first is rasterised:
+
+```bash
+python3 - <<'EOF'
+import re, zlib
+d = open('build/<name>.pdf','rb').read(); blobs=[d]
+for m in re.finditer(rb'stream\r?\n', d):
+    s=m.end(); e=d.find(b'endstream', s)
+    try: blobs.append(zlib.decompress(d[s:e]))
+    except Exception: pass
+print(max(len(re.findall(rb'/Type\s*/Page(?![s])', b)) for b in blobs))
+EOF
+```
+
+If one template fits and another overflows on the same content, that is a
+density difference between templates, not a content problem — but try trimming
+content first. Changing a template affects every resume that uses it.
 
 ## Local rendering is not Overleaf
 
