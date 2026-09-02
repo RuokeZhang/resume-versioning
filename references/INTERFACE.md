@@ -40,6 +40,12 @@ is a false economy — it is exactly what forces a content fork later.
 | `\resumeSectionGap` | Trailing gap after a section body. |
 | `\resumeTighten{<len>}` | Negative leading hint. **A template may ignore it.** |
 
+One place it is routinely needed: in a dense layout, `\resumeSubheading`
+opens with a small negative skip and `\resumeProjectHeading` does not, so two
+project headings in a row sit further apart than two job entries do. Put a
+`\resumeTighten` between consecutive project headings rather than editing the
+template — an airier layout ignores the hint and needs no such correction.
+
 `\resumeTighten` is the escape hatch for hand-tuned kerning. One layout's
 `\vspace{-10pt}` between a heading and its bullets can be correct there and
 overlap text badly elsewhere. Content states the hint; each template decides
