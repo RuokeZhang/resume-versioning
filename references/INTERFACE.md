@@ -64,7 +64,7 @@ with `\providecommand` so drivers can override:
 | Switch | Typical use |
 |---|---|
 | `\ifResume<Feature>` | Include or drop an optional entry, read by a content file |
-| `\Resume<Thing>Skip` | Per-role spacing knob where two roles were tuned differently |
+| `\Resume<Thing>Skip` | Spacing knob where two content sets were tuned differently |
 
 ## Driver shape
 
@@ -74,12 +74,12 @@ with `\providecommand` so drivers can override:
 \newif\ifResumeIncludeEarlyRoles
 \ResumeIncludeEarlyRolestrue
 
-\input{profiles/alex.tex}
+\input{profiles/example.tex}
 \input{templates/classic.tex}
 
 \begin{document}
 \ResumeHeader
-\input{content/backend.tex}
+\input{content/example-role.tex}
 \end{document}
 ```
 

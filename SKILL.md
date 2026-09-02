@@ -23,14 +23,14 @@ rendered PDF.
 Every resume is a selection, never a copy:
 
 ```
-profiles/<person>.tex  ×  templates/<layout>.tex  ×  content/<role>.tex  +  switches
+profiles/<person>.tex  ×  templates/<layout>.tex  ×  content/<target>.tex  +  switches
 ```
 
 | Directory | Holds | One file per |
 |---|---|---|
 | `profiles/` | name, email, phone, links | identity |
 | `templates/` | all layout; implements the command interface | visual style |
-| `content/` | wording only, zero layout markup | target role |
+| `content/` | wording only, zero layout markup | target |
 | drivers | a selection of the three, plus switches | finished resume |
 | `CONTENT_LIBRARY/` | archived and candidate wording, in Markdown | topic |
 
@@ -70,7 +70,7 @@ hit in practice.
 |---|---|
 | Set up a new repo | `scripts/init.sh <dir>`, then read `references/INTERFACE.md` |
 | Add a person | One new file in `profiles/`. Nothing else. |
-| Add a target role | One new file in `content/`, plus a driver per person |
+| Add a target | One new file in `content/`, plus a driver per person |
 | Add a visual template | Implement every command in `references/INTERFACE.md` |
 | Add a resume | `scripts/new-resume.sh` -- never copy an existing driver |
 | Change wording | Edit `content/`, archive the old text, then verify |
@@ -86,8 +86,8 @@ the decompressed PDF content streams:
 
 ```
 NAME                  HEAD              WORKING           STATUS
-Alex_Backend          97080675e88112c4  97080675e88112c4  IDENTICAL
-Alex_ML               5cfb6ff174e44187  cc42fc296a5e29eb  CHANGED
+Example_Resume        97080675e88112c4  97080675e88112c4  IDENTICAL
+Second_Resume         5cfb6ff174e44187  cc42fc296a5e29eb  CHANGED
 ```
 
 Report the table. Then, for every `CHANGED` row, either explain the intended

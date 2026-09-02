@@ -2,7 +2,7 @@
 # Create a driver: a resume is a selection, never a copy.
 #
 #   ./new-resume.sh <profile> <template> <content> [outfile]
-#   ./new-resume.sh alex classic backend SDE/Alex_SDE.tex
+#   ./new-resume.sh example classic example-role Example_Resume.tex
 #
 # Copying an existing driver is the thing this exists to prevent -- a copied
 # driver carries wording with it, and the two copies then drift.

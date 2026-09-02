@@ -2,7 +2,7 @@
 # Render resume drivers to PDF locally, without Overleaf.
 #
 #   ./preview.sh                          # every driver in the repo
-#   ./preview.sh MLE/Alex_MLE.tex         # just one
+#   ./preview.sh Example_Resume.tex       # just one
 #   OUT=/tmp/x ./preview.sh               # choose the output directory
 #
 # Requires tectonic (brew install tectonic).

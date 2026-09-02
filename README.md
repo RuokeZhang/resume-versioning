@@ -6,9 +6,9 @@ become several documents.
 ## The problem
 
 You have one resume. Then you need it under a different name for a different
-email account. Then a version aimed at backend roles and one aimed at ML.
-Then someone tells you a different visual template performs better, and you
-want that layout for one of them.
+email account. Then a version aimed at one kind of
+role and a version aimed at another. Then someone tells you a different
+visual template performs better, and you want that layout for one of them.
 
 The obvious move is to copy the file and edit. Do that twice and you have four
 documents that share 90% of their text, and no way to tell which copy has the
@@ -22,14 +22,14 @@ This skill keeps the wording in exactly one place.
 Every resume is a selection, never a copy:
 
 ```
-profiles/<person>.tex  ×  templates/<layout>.tex  ×  content/<role>.tex
+profiles/<person>.tex  ×  templates/<layout>.tex  ×  content/<target>.tex
 ```
 
 | Directory | Holds | One file per |
 |---|---|---|
 | `profiles/` | name, email, phone, links | identity |
 | `templates/` | all layout, implementing a shared command interface | visual style |
-| `content/` | wording only, zero layout markup | target role |
+| `content/` | wording only, zero layout markup | target |
 | drivers | a selection of the three, plus switches | finished resume |
 | `CONTENT_LIBRARY/` | archived and candidate wording, in Markdown | topic |
 
@@ -41,16 +41,16 @@ A driver is about twelve lines:
 \newif\ifResumeTimes
 \ResumeTimesfalse
 
-\input{profiles/alex.tex}
+\input{profiles/example.tex}
 \input{templates/classic.tex}
 
 \begin{document}
 \ResumeHeader
-\input{content/backend.tex}
+\input{content/example-role.tex}
 \end{document}
 ```
 
-Adding a person is one file. Adding a target role is one file. Adding a visual
+Adding a person is one file. Adding a target is one file. Adding a visual
 template means implementing the command interface in
 [references/INTERFACE.md](references/INTERFACE.md) — after which every existing
 resume can render in it.
@@ -84,8 +84,8 @@ the decompressed PDF content streams:
 
 ```
 NAME                  HEAD              WORKING           STATUS
-Alex_Backend          97080675e88112c4  97080675e88112c4  IDENTICAL
-Alex_ML               5cfb6ff174e44187  cc42fc296a5e29eb  CHANGED
+Example_Resume        97080675e88112c4  97080675e88112c4  IDENTICAL
+Second_Resume         5cfb6ff174e44187  cc42fc296a5e29eb  CHANGED
 ```
 
 Anything `CHANGED` is either an edit you meant or a regression. There is no
@@ -93,7 +93,7 @@ third case.
 
 ```bash
 ./scripts/preview.sh          # render everything to build/
-./scripts/preview.sh SDE/Alex_SDE.tex
+./scripts/preview.sh Example_Resume.tex
 ```
 
 ## Requirements
