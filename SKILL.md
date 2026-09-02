@@ -24,7 +24,7 @@ Every resume is a selection, never a copy:
 
 ```
 profiles/<person>.tex  ×  templates/<layout>.tex  ×  content/<target>.tex
-                       ×  fonts/<face>.tex        +  switches
+                       ×  \ResumeFont            +  switches
 ```
 
 | Directory | Holds | One file per |
@@ -84,7 +84,7 @@ hit in practice.
 | Add a person | One new file in `profiles/`. Nothing else. |
 | Add a target | One new file in `content/`, plus a driver per person |
 | Add a visual template | Implement every command in `references/INTERFACE.md` |
-| Change the typeface | One line in the driver: `\input{fonts/<face>.tex}` |
+| Change the typeface | One line in the driver: `\newcommand{\ResumeFont}{<face>}` |
 | Add a resume | `scripts/new-resume.sh` -- never copy an existing driver |
 | Change wording | Edit `content/`, archive the old text, then verify |
 | Preview | `scripts/preview.sh` -- renders locally, no Overleaf needed |

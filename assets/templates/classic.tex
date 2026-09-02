@@ -27,15 +27,13 @@
 \setlength{\columnsep}{-1pt}
 \input{glyphtounicode}
 
-% Font. The driver may \input a fonts/ file before this one; if it did not,
-% fall back to the default. Replaces an earlier \ifResumeTimes boolean, which
-% could only ever express two choices.
-\providecommand{\ResumeFontName}{}
-\makeatletter
-\ifx\ResumeFontName\@empty
-  \input{fonts/sourcesans.tex}
-\fi
-\makeatother
+% Font. A driver selects one by name before \input-ing this template:
+%   \newcommand{\ResumeFont}{carlito}
+% It is input here rather than by the driver because font packages must load
+% after fontenc; loading one earlier changes the encoding setup and silently
+% shifts the metrics.
+\providecommand{\ResumeFont}{sourcesans}
+\input{fonts/\ResumeFont.tex}
 
 % Spacing knobs. A driver may override these before \input-ing this file; two
 % roles are often tuned to slightly different values.

@@ -23,7 +23,7 @@ Every resume is a selection, never a copy:
 
 ```
 profiles/<person>.tex  ×  templates/<layout>.tex  ×  content/<target>.tex
-                       ×  fonts/<face>.tex
+                       ×  \ResumeFont
 ```
 
 | Directory | Holds | One file per |
@@ -43,8 +43,9 @@ A driver is about twelve lines:
 \newif\ifResumeTimes
 \ResumeTimesfalse
 
+\newcommand{\ResumeFont}{carlito}
+
 \input{profiles/example.tex}
-\input{fonts/carlito.tex}
 \input{templates/classic.tex}
 
 \begin{document}

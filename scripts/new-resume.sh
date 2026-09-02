@@ -45,8 +45,8 @@ mkdir -p "$(dirname "$REPO/$OUTFILE")"
   for s in $switches; do
     printf '\\newif\\if%s\n\\%strue\n' "$s" "$s"
   done
+  printf '\n\\newcommand{\\ResumeFont}{%s}\n' "$FONT"
   printf '\n\\input{profiles/%s.tex}\n' "$PROFILE"
-  printf '\\input{fonts/%s.tex}\n' "$FONT"
   printf '\\input{templates/%s.tex}\n\n' "$TEMPLATE"
   printf '\\begin{document}\n\\ResumeHeader\n\\input{content/%s.tex}\n\\end{document}\n' "$CONTENT"
 } > "$REPO/$OUTFILE"

@@ -80,8 +80,9 @@ with `\providecommand` so drivers can override:
 \newif\ifResumeIncludeEarlyRoles
 \ResumeIncludeEarlyRolestrue
 
+\newcommand{\ResumeFont}{carlito}
+
 \input{profiles/example.tex}
-\input{fonts/carlito.tex}
 \input{templates/classic.tex}
 
 \begin{document}
@@ -94,9 +95,16 @@ That is the whole file. Anything longer is content leaking into a driver.
 
 ## Fonts
 
-A driver may `\input` one file from `fonts/` before the template. The template
-uses whatever was loaded, and falls back to `fonts/sourcesans.tex` if the
-driver picked nothing, so the choice is optional.
+A driver names a face; the template inputs it. The name is all the driver
+provides, because font packages must load **after** `fontenc` — a driver that
+inputs the font itself loads it too early, which changes the encoding setup
+and silently shifts the metrics of every line.
+
+```latex
+\newcommand{\ResumeFont}{carlito}   % before \input{templates/...}
+```
+
+Omit it and the template falls back to `sourcesans`.
 
 | File | Face | Notes |
 |---|---|---|
@@ -119,7 +127,6 @@ loads the packages:
 
 ```latex
 % fonts/<name>.tex
-\newcommand{\ResumeFontName}{<name>}
 \usepackage{<package>}
 \renewcommand{\familydefault}{\sfdefault}   % sans faces only
 ```

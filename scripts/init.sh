@@ -61,8 +61,9 @@ if [ ! -e "$TARGET/Example_Resume.tex" ]; then
 \newif\ifResumeIncludeEarlyRoles
 \ResumeIncludeEarlyRolestrue
 
+\newcommand{\ResumeFont}{sourcesans}
+
 \input{profiles/example.tex}
-\input{fonts/sourcesans.tex}
 \input{templates/classic.tex}
 
 \begin{document}
