@@ -1,5 +1,7 @@
 # resume-versioning
 
+**English** · [简体中文](README.zh-CN.md)
+
 A Claude Code skill for LaTeX resume repos where one set of wording has to
 become several documents.
 
@@ -30,37 +32,6 @@ Swapping either one is a line in the driver. The wording exists once.
 
 <sub>Rendered on Overleaf. Content is fictional.</sub>
 
-## Fonts
-
-Nine faces ship in `fonts/`. Pick one by name in the driver:
-
-```latex
-\newcommand{\ResumeFont}{carlito}
-```
-
-**Sans**
-
-![sourcesans](docs/fonts/sourcesans.png)
-![carlito](docs/fonts/carlito.png)
-![lato](docs/fonts/lato.png)
-![helvetica](docs/fonts/helvetica.png)
-![roboto](docs/fonts/roboto.png)
-
-**Serif**
-
-![caladea](docs/fonts/caladea.png)
-![times](docs/fonts/times.png)
-![charter](docs/fonts/charter.png)
-![garamond](docs/fonts/garamond.png)
-
-`carlito` and `caladea` are metric-compatible with **Calibri** and **Cambria** —
-same widths, so a layout tuned for those keeps its line breaks. Calibri and
-Cambria are proprietary Microsoft fonts and cannot be bundled, which is why the
-clones exist.
-
-Changing the face changes line breaks. Re-run `scripts/verify.sh` and look at
-the render afterwards.
-
 ## The structure
 
 Every resume is a selection, never a copy:
@@ -83,9 +54,6 @@ A driver is about twelve lines:
 
 ```latex
 \documentclass[letterpaper,11pt]{article}
-
-\newif\ifResumeTimes
-\ResumeTimesfalse
 
 \newcommand{\ResumeFont}{carlito}
 
@@ -167,6 +135,37 @@ locally. Two things to know, both handled by `preview.sh`:
 
 Because of the second point, a local render is a good check but not proof of
 Overleaf output. See [references/overleaf.md](references/overleaf.md).
+
+## Fonts
+
+Nine faces ship in `fonts/`. Pick one by name in the driver:
+
+```latex
+\newcommand{\ResumeFont}{carlito}
+```
+
+**Sans**
+
+![sourcesans](docs/fonts/sourcesans.png)
+![carlito](docs/fonts/carlito.png)
+![lato](docs/fonts/lato.png)
+![helvetica](docs/fonts/helvetica.png)
+![roboto](docs/fonts/roboto.png)
+
+**Serif**
+
+![caladea](docs/fonts/caladea.png)
+![times](docs/fonts/times.png)
+![charter](docs/fonts/charter.png)
+![garamond](docs/fonts/garamond.png)
+
+`carlito` and `caladea` are metric-compatible with **Calibri** and **Cambria** —
+same widths, so a layout tuned for those keeps its line breaks. Calibri and
+Cambria are proprietary Microsoft fonts and cannot be bundled, which is why the
+clones exist.
+
+Changing the face changes line breaks. Re-run `scripts/verify.sh` and look at
+the render afterwards.
 
 ## Provenance
 
