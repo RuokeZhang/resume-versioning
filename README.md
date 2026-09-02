@@ -17,6 +17,50 @@ An old inflated number survives in a file you forgot about.
 
 This skill keeps the wording in exactly one place.
 
+## What it looks like
+
+The same `content/` file, rendered two ways. Nothing below differs in wording —
+only the template and the typeface.
+
+| `classic` + `sourcesans` | `engineering` + `caladea` |
+|---|---|
+| <img src="docs/classic-sourcesans.png" width="420"> | <img src="docs/engineering-caladea.png" width="420"> |
+
+Swapping either one is a line in the driver. The wording exists once.
+
+<sub>Rendered on Overleaf. Content is fictional.</sub>
+
+## Fonts
+
+Nine faces ship in `fonts/`. Pick one by name in the driver:
+
+```latex
+\newcommand{\ResumeFont}{carlito}
+```
+
+**Sans**
+
+![sourcesans](docs/fonts/sourcesans.png)
+![carlito](docs/fonts/carlito.png)
+![lato](docs/fonts/lato.png)
+![helvetica](docs/fonts/helvetica.png)
+![roboto](docs/fonts/roboto.png)
+
+**Serif**
+
+![caladea](docs/fonts/caladea.png)
+![times](docs/fonts/times.png)
+![charter](docs/fonts/charter.png)
+![garamond](docs/fonts/garamond.png)
+
+`carlito` and `caladea` are metric-compatible with **Calibri** and **Cambria** —
+same widths, so a layout tuned for those keeps its line breaks. Calibri and
+Cambria are proprietary Microsoft fonts and cannot be bundled, which is why the
+clones exist.
+
+Changing the face changes line breaks. Re-run `scripts/verify.sh` and look at
+the render afterwards.
+
 ## The structure
 
 Every resume is a selection, never a copy:
@@ -53,10 +97,6 @@ A driver is about twelve lines:
 \input{content/example-role.tex}
 \end{document}
 ```
-
-Nine faces ship in `fonts/`, including **Carlito** and **Caladea** — free
-clones with the same metrics as Calibri and Cambria, which are proprietary and
-cannot be bundled. Swapping one is a one-line change in the driver.
 
 Adding a person is one file. Adding a target is one file. Adding a visual
 template means implementing the command interface in
