@@ -81,6 +81,24 @@ Claude Code 会自动识别。让它初始化简历仓库、加一个变体、�
 ~/.claude/skills/resume-versioning/scripts/init.sh ~/my-resume
 ```
 
+### 可选：`log-app` 配套 skill
+
+`log-app/` 是同仓库里的第二个独立 skill，用来记录**哪一份渲染出来的简历投给了哪家公司**。
+和主 skill 一起装：
+
+```bash
+ln -s ~/.claude/skills/resume-versioning/log-app ~/.claude/skills/log-app
+```
+
+之后用 `/log-app <sha> <driver> "<职位标题>"` 触发。它会验证 SHA 和 driver
+在你的简历仓库里存在，然后往本地 CSV
+（默认 `~/Documents/RESUME/applications.csv`，可用 `RESUME_APPLICATIONS_CSV` 覆盖）
+追加一行。简历仓库路径默认 `~/Documents/RESUME/overleaf`，可用 `RESUME_OVERLEAF_DIR`
+覆盖。CSV 是私密数据，仓库的 `.gitignore` 已经拦掉 `applications.csv`，防止它被误提交
+到这里或任何这份仓库的其他 clone。
+
+详见 [log-app/SKILL.md](log-app/SKILL.md)。
+
 ## 验证
 
 这套东西之所以是 skill 而不是一篇博客：**重构简历仓库不应该改变任何一份简历的样子，

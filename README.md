@@ -86,6 +86,24 @@ To scaffold a repo without Claude:
 ~/.claude/skills/resume-versioning/scripts/init.sh ~/my-resume
 ```
 
+### Optional: `log-app` companion skill
+
+`log-app/` is a second, self-contained skill for recording *which* rendered
+resume you sent to *which* job. Install it alongside the main skill:
+
+```bash
+ln -s ~/.claude/skills/resume-versioning/log-app ~/.claude/skills/log-app
+```
+
+Then invoke with `/log-app <sha> <driver> "<job title>"`. It appends one row to
+a local CSV (default `~/Documents/RESUME/applications.csv`, overridable via
+`RESUME_APPLICATIONS_CSV`) after verifying the SHA and driver exist in your
+resume repo (default `~/Documents/RESUME/overleaf`, overridable via
+`RESUME_OVERLEAF_DIR`). The CSV is private — the repo's `.gitignore` blocks
+`applications.csv` from being committed here or anywhere this repo is cloned.
+
+See [log-app/SKILL.md](log-app/SKILL.md) for the full spec.
+
 ## Verification
 
 The reason this is a skill and not a blog post: restructuring a resume repo

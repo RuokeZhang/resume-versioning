@@ -4,3 +4,9 @@ build/
 *.out
 *.synctex.gz
 .DS_Store
+
+# log-app: real application data must never be committed.
+# The .example file is the schema; real logs default to
+# ~/Documents/RESUME/applications.csv (outside this repo).
+applications.csv
+
