@@ -17,8 +17,7 @@
 
 ## 效果
 
-同一份 `content/` 文件，两种渲染方式。下面两份的**文字一个字都不差**，
-不同的只有模板和字体。
+同一份目标组合，两种渲染方式。下面两份的**文字一个字都不差**，不同的只有模板和字体。
 
 | `classic` + `sourcesans` | `engineering` + `caladea` |
 |---|---|
@@ -41,7 +40,7 @@ profiles/<人>.tex  ×  templates/<排版>.tex  ×  content/<岗位方向>.tex
 |---|---|---|
 | `profiles/` | 姓名、邮箱、电话、链接 | 一个身份 |
 | `templates/` | 全部排版，实现一套共享命令接口 | 一种视觉风格 |
-| `content/` | 只有措辞，零排版标记 | 一个岗位方向 |
+| `content/` | 目标组合、可复用的经历条目、按岗位归组的项目 | 一个岗位方向或可复用条目 |
 | `fonts/` | 字体选择，可选 | 一种字体 |
 | 驱动文件 | 以上各项的组合，加开关 | 一份成品简历 |
 | `CONTENT_LIBRARY/` | 归档与候选措辞，Markdown 格式 | 一个主题 |
@@ -62,7 +61,28 @@ profiles/<人>.tex  ×  templates/<排版>.tex  ×  content/<岗位方向>.tex
 \end{document}
 ```
 
-加一个人，是一个文件。加一个岗位方向，是一个文件。加一套排版，则需要实现
+`content/` 内的目标文件是组合清单，不再复制每段经历：
+
+```text
+content/
+├── example-role.tex
+├── experience/
+│   ├── example-company.tex
+│   └── earlier-company.tex
+└── projects/
+    └── example-role.tex
+```
+
+`example-role.tex` 用 `\input{...}` 选择经历条目，并为该岗位方向引入一个项目集合文件。
+实习和工作经历按条目拆分，因为同一段经历经常复用于多个岗位方向；项目则按岗位方向集中
+在一个文件里，因为项目通常作为一组被选择和排序，把每个项目都拆成文件只会增加跳转成本，
+并不会解决已经出现的漂移问题。
+
+这是有意选择的粒度。`profiles/` 仍然是独立且必要的维度：同一套简历内容可以用于不同
+姓名和联系方式，而不用复制内容或模板。
+
+加一个人，是一个 profile。加一个岗位方向，是一个组合文件加一份项目集合，并复用已有
+经历条目。加一套排版，则需要实现
 [references/INTERFACE.md](references/INTERFACE.md) 里的命令接口 ——
 实现之后，**现有的每一份简历**都能用它渲染。
 

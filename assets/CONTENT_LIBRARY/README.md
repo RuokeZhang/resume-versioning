@@ -1,8 +1,10 @@
 # Resume Content Library
 
-Reference material, not compiled. `content/` holds the wording that is live
-right now; this holds everything else, so that replaced wording and the facts
-underneath it are never lost.
+Reference material, not compiled. `content/experience/` holds reusable active
+work entries, while `content/projects/` keeps each target's project set in one
+file. Target composition files select those pieces. This library holds
+everything else, so replaced wording and the facts underneath it are never
+lost.
 
 ## Structure
 

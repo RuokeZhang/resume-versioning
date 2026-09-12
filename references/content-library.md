@@ -1,8 +1,10 @@
 # The content library
 
-`content/` holds the wording that is live right now. `CONTENT_LIBRARY/` holds
-everything else: what was live before, what was drafted and not chosen, and the
-verified facts underneath it all.
+`content/` holds the wording that is live right now. Reusable work and
+internship entries live under `content/experience/`; each target keeps its
+projects together under `content/projects/`. Target composition files select
+those pieces. `CONTENT_LIBRARY/` holds everything else: what was live before,
+what was drafted and not chosen, and the verified facts underneath it all.
 
 |  | `content/` | `CONTENT_LIBRARY/` |
 |---|---|---|

@@ -1,7 +1,8 @@
 # Template command interface
 
-Every template implements this command set. Content files use only these
-commands, which is what lets one content file render under any template.
+Every template implements this command set. Content compositions and entries
+use only these commands, which is what lets one target render under any
+template.
 
 Adding a template means implementing **all** of it. A missing command produces
 an "Undefined control sequence" error only for the resumes that happen to use
@@ -91,7 +92,9 @@ with `\providecommand` so drivers can override:
 \end{document}
 ```
 
-That is the whole file. Anything longer is content leaking into a driver.
+That is the whole file. The selected target file composes reusable experience
+entries and a grouped project set. Anything longer is content leaking into a
+driver.
 
 ## Fonts
 
