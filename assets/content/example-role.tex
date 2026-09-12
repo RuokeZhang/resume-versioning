@@ -1,6 +1,6 @@
-% Wording only. Every command used here must exist in BOTH templates --
-% see references/INTERFACE.md. No \vspace, no \begin{itemize}, no raw layout:
-% use \resumeTighten{} for spacing hints a template is free to ignore.
+% Target composition. Experience entries are reusable atoms because they are
+% the content most often shared across role targets. Projects stay together in
+% one target-specific file so selecting and ordering a project set remains easy.
 
 \section{EDUCATION}
   \resumeSubHeadingListStart
@@ -11,34 +11,18 @@
 
 \section{WORK EXPERIENCE}
   \resumeSubHeadingListStart
-    \resumeSubheading
-      {Company Name}{Mon 20XX -- Mon 20XX}
-      {Job Title}{}
-      \resumeItemListStart
-        \resumeItem{Built <what> using <how>, <measurable outcome>.}
-        \resumeItem{Shipped <what> that <effect on users or system>.}
-      \resumeItemListEnd
+    \input{content/experience/example-company.tex}
 
 % An optional entry, toggled by a switch the driver declares.
 \ifResumeIncludeEarlyRoles
-    \resumeSubheading
-      {Earlier Company}{Mon 20XX -- Mon 20XX}
-      {Job Title}{}
-      \resumeItemListStart
-        \resumeItem{Built <what> using <how>.}
-      \resumeItemListEnd
+    \input{content/experience/earlier-company.tex}
 \fi
   \resumeSubHeadingListEnd
 \resumeSectionGap
 
 \section{PROJECTS}
     \resumeSubHeadingListStart
-      \resumeProjectHeading
-        {Project Name \textnormal{\small\textperiodcentered{} \href{https://example.com}{[Link]}}}
-        {Mon 20XX}
-      \resumeItemListStart
-        \resumeItem{Built <what>, <what it does>.}
-      \resumeItemListEnd
+      \input{content/projects/example-role.tex}
     \resumeSubHeadingListEnd
 \resumeSectionGap
 

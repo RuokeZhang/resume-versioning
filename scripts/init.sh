@@ -30,6 +30,9 @@ copy "$ASSETS/templates/classic.tex"              templates/classic.tex
 copy "$ASSETS/templates/engineering.tex"          templates/engineering.tex
 copy "$ASSETS/profiles/example.tex"               profiles/example.tex
 copy "$ASSETS/content/example-role.tex"           content/example-role.tex
+copy "$ASSETS/content/experience/example-company.tex" content/experience/example-company.tex
+copy "$ASSETS/content/experience/earlier-company.tex" content/experience/earlier-company.tex
+copy "$ASSETS/content/projects/example-role.tex"  content/projects/example-role.tex
 copy "$ASSETS/fonts/sourcesans.tex"                fonts/sourcesans.tex
 copy "$ASSETS/fonts/carlito.tex"                   fonts/carlito.tex
 copy "$ASSETS/fonts/lato.tex"                      fonts/lato.tex
@@ -78,7 +81,7 @@ echo
 echo "Structure:"
 echo "  profiles/   one file per identity"
 echo "  templates/  one file per visual style; see templates/INTERFACE.md"
-echo "  content/    one file per target -- wording only, no layout"
+echo "  content/    target compositions, reusable experience entries, and grouped projects"
 echo "  fonts/      one file per typeface; optional, defaults to sourcesans"
 echo "  *.tex       drivers: a selection of the above"
 echo

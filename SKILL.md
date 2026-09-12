@@ -31,7 +31,7 @@ profiles/<person>.tex  ×  templates/<layout>.tex  ×  content/<target>.tex
 |---|---|---|
 | `profiles/` | name, email, phone, links | identity |
 | `templates/` | all layout; implements the command interface | visual style |
-| `content/` | wording only, zero layout markup | target |
+| `content/` | target compositions, reusable experience entries, grouped project sets | target or reusable entry |
 | `fonts/` | typeface selection; optional, defaults to sourcesans | face |
 | drivers | a selection of the above, plus switches | finished resume |
 | `CONTENT_LIBRARY/` | archived and candidate wording, in Markdown | topic |
@@ -48,6 +48,13 @@ hit in practice.
    never copy a content file to make a variant. The tempting shortcut --
    "just this one resume needs a different template, I'll copy the file" --
    is what creates two copies that then drift apart independently.
+
+   A target file is a composition: it selects reusable entries with `\input`.
+   Keep each work or internship entry in `content/experience/`, because those
+   entries are commonly shared across targets. Keep the complete project set
+   for a target in one `content/projects/<target>.tex` file. Do not split every
+   project into its own file by default; that adds indirection without solving
+   a demonstrated drift problem.
 
 2. **Content carries no layout.** No `\vspace`, no `\begin{itemize}`, no
    `\textbf` used for structure. One template's hand-tuned negative kerning is
@@ -82,11 +89,11 @@ hit in practice.
 |---|---|
 | Set up a new repo | `scripts/init.sh <dir>`, then read `references/INTERFACE.md` |
 | Add a person | One new file in `profiles/`. Nothing else. |
-| Add a target | One new file in `content/`, plus a driver per person |
+| Add a target | One composition, one grouped project file, and a driver per person; reuse experience entries |
 | Add a visual template | Implement every command in `references/INTERFACE.md` |
 | Change the typeface | One line in the driver: `\newcommand{\ResumeFont}{<face>}` |
 | Add a resume | `scripts/new-resume.sh` -- never copy an existing driver |
-| Change wording | Edit `content/`, archive the old text, then verify |
+| Change wording | Edit the owning experience or project-set file, archive the old text, then verify |
 | Preview | `scripts/preview.sh` -- renders locally, no Overleaf needed |
 | Check a refactor | `scripts/verify.sh` -- see below |
 | Push to Overleaf | `references/overleaf.md` |

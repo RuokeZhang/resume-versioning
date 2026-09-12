@@ -21,8 +21,8 @@ This skill keeps the wording in exactly one place.
 
 ## What it looks like
 
-The same `content/` file, rendered two ways. Nothing below differs in wording —
-only the template and the typeface.
+The same target composition, rendered two ways. Nothing below differs in
+wording — only the template and the typeface.
 
 | `classic` + `sourcesans` | `engineering` + `caladea` |
 |---|---|
@@ -45,7 +45,7 @@ profiles/<person>.tex  ×  templates/<layout>.tex  ×  content/<target>.tex
 |---|---|---|
 | `profiles/` | name, email, phone, links | identity |
 | `templates/` | all layout, implementing a shared command interface | visual style |
-| `content/` | wording only, zero layout markup | target |
+| `content/` | target compositions, reusable experience entries, grouped project sets | target or reusable entry |
 | `fonts/` | typeface selection; optional | face |
 | drivers | a selection of the above, plus switches | finished resume |
 | `CONTENT_LIBRARY/` | archived and candidate wording, in Markdown | topic |
@@ -66,7 +66,32 @@ A driver is about twelve lines:
 \end{document}
 ```
 
-Adding a person is one file. Adding a target is one file. Adding a visual
+Inside `content/`, the target file is a small composition rather than a copy of
+every entry:
+
+```text
+content/
+├── example-role.tex
+├── experience/
+│   ├── example-company.tex
+│   └── earlier-company.tex
+└── projects/
+    └── example-role.tex
+```
+
+`example-role.tex` selects experience entries with `\input{...}` and includes
+one project-set file for the target. Work experience is split by entry because
+the same internship is commonly reused across several targets. Projects stay
+grouped by target because they are usually selected and reordered as a set;
+making every project a separate file adds navigation without enabling a real
+reuse case or addressing a demonstrated drift risk.
+
+This granularity is intentional. `profiles/` remains a separate, useful axis:
+it lets the same resume content render for different names and contact details
+without duplicating either content or templates.
+
+Adding a person is one profile. Adding a target is one composition plus its
+grouped project set, reusing the relevant experience entries. Adding a visual
 template means implementing the command interface in
 [references/INTERFACE.md](references/INTERFACE.md) — after which every existing
 resume can render in it.
