@@ -26,7 +26,7 @@ wording — only the template and the typeface.
 
 | `classic` + `sourcesans` | `engineering` + `caladea` |
 |---|---|
-| <img src="docs/classic-sourcesans.png" width="420"> | <img src="docs/engineering-caladea.png" width="420"> |
+| ![classic with Source Sans](./docs/classic-sourcesans.png) | ![engineering with Caladea](./docs/engineering-caladea.png) |
 
 Swapping either one is a line in the driver. The wording exists once.
 

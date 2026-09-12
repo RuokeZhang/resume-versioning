@@ -21,7 +21,7 @@
 
 | `classic` + `sourcesans` | `engineering` + `caladea` |
 |---|---|
-| <img src="docs/classic-sourcesans.png" width="420"> | <img src="docs/engineering-caladea.png" width="420"> |
+| ![classic 与 Source Sans](./docs/classic-sourcesans.png) | ![engineering 与 Caladea](./docs/engineering-caladea.png) |
 
 换模板或换字体，都只是驱动文件里的一行。措辞只有一份。
 
