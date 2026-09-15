@@ -39,16 +39,22 @@ If `RESUME_APPLICATIONS_CSV` does not exist, create it with the header
 
 ## Inputs
 
-The user provides some or all of:
+The user typically invokes this skill with **a job URL + a PDF path** — that
+is the primary shape of the call. Both go straight into the row; do not
+re-ask for what was already handed over.
 
-- **commit SHA** — from the resume repo, identifies the exact source used
-- **driver** — which `.tex` under `MLE/`, `SDE/`, or wherever drivers live, was
-  compiled to produce the PDF (e.g. `Roxie_SDE_ML_Mar2027`)
-- **job title** — free-form, e.g. `"Anthropic — Software Engineer, Model Behavior"`
-- **pdf_path** (optional) — absolute path to the exact PDF that was submitted,
-  if kept locally. Handy for reopening the submitted file without recompiling.
+- **pdf_path** — absolute path to the submitted PDF. **Almost always provided
+  in the invocation.** Record it verbatim in the `pdf_path` column. Do not
+  verify content, do not "look up" the file — just store the path.
+- **job link** — the URL the user pasted. Fetch it to derive the job title
+  (see step 5).
+- **commit SHA + driver** — derive from the PDF: read its content and match
+  against the resume repo (see step 4). Do not ask the user for these; they
+  are inferable.
+- **job title** — usually derived from the URL. Only ask if the fetch fails.
 
-Missing pieces: ask. Do not invent values.
+Only ask for something when it is genuinely missing. Never re-ask for the
+pdf_path or link — they were in the invocation.
 
 ## Steps
 
@@ -68,25 +74,36 @@ Missing pieces: ask. Do not invent values.
    git -C "$RESUME_OVERLEAF_DIR" rev-parse --short=12 <sha>
    ```
 
-4. **Verify the driver file exists at that commit**. The driver may be given
-   with or without directory prefix and with or without the `.tex` extension.
-   Try the plausible forms:
-   ```
-   git -C "$RESUME_OVERLEAF_DIR" ls-tree -r --name-only <sha> \
-     | grep -E "(^|/)<driver>(\.tex)?$"
-   ```
-   If nothing matches, list the drivers at that commit and ask the user to
-   pick one:
+4. **Identify the (SHA, driver) that produced the PDF** by *content*, not by
+   filename. The user renames PDFs freely after downloading, so
+   `Ruoke_SDE_ML_March27.pdf` may contain MLE content, and so on. Read the
+   PDF, then match distinctive fingerprints against `git log`:
+   - **Persona** — name, email, phone in the header identifies which
+     `profiles/*.tex` was used.
+   - **Content structure** — SDE vs SDE-ML vs MLE variant is distinguishable
+     from LinkedIn title ("Software Engineer Intern" vs "Machine Learning
+     Engineer Intern"), whether Shanghai AI Lab / Virtual Hybrid appear,
+     whether PUBLICATIONS is above or below PROJECTS, and the SKILLS row
+     layout.
+   - **Distinctive bullets** — `git log -S "<phrase>" --all` with a phrase
+     copied from the PDF (a metric, a project bullet) usually pins the
+     commit that introduced the exact wording.
+   - **Cross-check with mtime** — the PDF's file mtime should land within
+     minutes of the identified commit's timestamp. Strong sanity signal.
+
+   Then confirm the driver file exists at that commit:
    ```
    git -C "$RESUME_OVERLEAF_DIR" ls-tree -r --name-only <sha> \
      | grep -E '\.tex$' | grep -Ev '^(content|templates|profiles|fonts)/'
    ```
 
-5. **Ask for an application link** (LinkedIn/Greenhouse/company careers URL).
-   If the user says skip, leave the field empty. Do not fabricate.
+5. **Fetch the URL** to get the job title (WebFetch). If the fetch redirects
+   (e.g. Greenhouse `boards.greenhouse.io/embed/...` → `job-boards...`),
+   follow the redirect. Never fabricate a title from the URL slug unless
+   the fetch fails outright.
 
-6. **Ask for optional notes** (referrer, deadline, salary band, etc.). Skip
-   if the user declines.
+6. **Notes are optional** — leave empty unless the user provided some in the
+   invocation.
 
 7. **Append one CSV row** to `$RESUME_APPLICATIONS_CSV`. Fields:
    - `date` — today's date in `YYYY-MM-DD`
@@ -95,7 +112,8 @@ Missing pieces: ask. Do not invent values.
    - `job_title` — as provided
    - `link` — as provided, or empty
    - `notes` — as provided, or empty
-   - `pdf_path` — absolute path to the submitted PDF if provided, or empty
+   - `pdf_path` — absolute path to the submitted PDF, from the invocation.
+     Record verbatim.
 
    Quote any field containing a comma, double-quote, or newline (RFC 4180):
    wrap in `"..."` and escape internal `"` as `""`.
