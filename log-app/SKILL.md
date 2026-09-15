@@ -35,7 +35,7 @@ If `RESUME_OVERLEAF_DIR` does not exist, stop and tell the user to clone their
 resume repo there or export the variable. Do not guess.
 
 If `RESUME_APPLICATIONS_CSV` does not exist, create it with the header
-`date,sha,driver,job_title,link,notes` before appending.
+`date,sha,driver,job_title,link,notes,pdf_path` before appending.
 
 ## Inputs
 
@@ -45,6 +45,8 @@ The user provides some or all of:
 - **driver** — which `.tex` under `MLE/`, `SDE/`, or wherever drivers live, was
   compiled to produce the PDF (e.g. `Roxie_SDE_ML_Mar2027`)
 - **job title** — free-form, e.g. `"Anthropic — Software Engineer, Model Behavior"`
+- **pdf_path** (optional) — absolute path to the exact PDF that was submitted,
+  if kept locally. Handy for reopening the submitted file without recompiling.
 
 Missing pieces: ask. Do not invent values.
 
@@ -93,6 +95,7 @@ Missing pieces: ask. Do not invent values.
    - `job_title` — as provided
    - `link` — as provided, or empty
    - `notes` — as provided, or empty
+   - `pdf_path` — absolute path to the submitted PDF if provided, or empty
 
    Quote any field containing a comma, double-quote, or newline (RFC 4180):
    wrap in `"..."` and escape internal `"` as `""`.
