@@ -49,12 +49,24 @@ hit in practice.
    "just this one resume needs a different template, I'll copy the file" --
    is what creates two copies that then drift apart independently.
 
-   A target file is a composition: it selects reusable entries with `\input`.
-   Keep each work or internship entry in `content/experience/`, because those
-   entries are commonly shared across targets. Keep the complete project set
-   for a target in one `content/projects/<target>.tex` file. Do not split every
-   project into its own file by default; that adds indirection without solving
-   a demonstrated drift problem.
+   A target file is a composition: it selects reusable entries with `\input`
+   (or the lightweight `\resumeExp{...}` / `\resumeProj{...}` / `\resumeEdu{...}`
+   / `\resumePub{...}` / `\resumeSkills{...}` wrappers, if the repo defines
+   `templates/composition.tex`).
+
+   Split each **project within a role** into its own atom under
+   `content/experience/<role>/<variant>.tex` (e.g. `linkedin/agentic_rl.tex`,
+   `linkedin/rsi.tex`, `linkedin/sglang.tex`) and its `_header_<title>.tex`.
+   Do the same for standalone projects under `content/projects/<name>.tex`.
+   Historically this skill said "do not split by default" -- that advice was
+   revised once the drift trigger hit in practice: one target wanted a
+   different job title on the LinkedIn header from another target, so a whole
+   content blob got forked, and pieces then diverged silently. Project-level
+   atoms remove that failure mode. Splitting up front is cheap; an unused
+   atom is a file no driver `\input`s, at zero cost.
+
+   Keep candidate/unused variants as `.tex` files anyway -- the archive is
+   the file itself, live and ready to be wired in.
 
 2. **Content carries no layout.** No `\vspace`, no `\begin{itemize}`, no
    `\textbf` used for structure. One template's hand-tuned negative kerning is
@@ -82,6 +94,16 @@ hit in practice.
 
 5. **Verify every structural change by rendering.** A refactor that changes a
    PDF is a bug unless the user asked for that change. See below.
+
+6. **Local disk is not the Overleaf render.** Before telling the user "the
+   change is in", confirm via `git status` and `git log origin/main` that the
+   edit is committed AND pushed. An edit that sits in a dirty working tree,
+   or in a local commit that never reached the remote, will not appear in the
+   PDF Overleaf builds -- and the user will chase a ghost. This has already
+   happened: the user asked why a bullet was missing from the rendered PDF
+   when the file on disk clearly had it; the fix was to notice the change
+   was uncommitted and push. Never claim a render effect from disk state
+   alone.
 
 ## Tasks
 
